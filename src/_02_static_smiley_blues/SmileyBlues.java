@@ -7,7 +7,7 @@ public class SmileyBlues {
 	void start() {
 		// 1. Make a new JFrame and set it to be visible
 		JFrame frame = new JFrame();
-		// 2. Set your frame's default close operation to JFrame.EXIT_ON_CLOSE
+		frame.setVisible(true);		// 2. Set your frame's default close operation to JFrame.EXIT_ON_CLOSE
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 3. Make a new JPanel
 		JPanel panel = new JPanel();
@@ -20,7 +20,7 @@ public class SmileyBlues {
 		
 		// 5. Make three Smiley objects and add them to your panel
 		Smiley smiley1 = new Smiley();
-		smiley1.setColor(Smiley.BLUE);
+		Smiley.setColor(Smiley.GREEN);
 		Smiley smiley2 = new Smiley();
 		Smiley smiley3 = new Smiley();
 		panel.add(smiley1);
