@@ -12,6 +12,8 @@ public class Frogger extends PApplet {
     PImage carLeft;
     PImage carRight;
     PImage frog;
+    FroggerCar car1;
+    FroggerCar car2;
     
     @Override
     public void settings() {
@@ -25,6 +27,9 @@ public class Frogger extends PApplet {
     	carLeft = loadImage("src/_06_frogger/carLeft.png");
     	carRight = loadImage("src/_06_frogger/carRight.png");
     	frog = loadImage("src/_06_frogger/frog.png");
+    	car1 = new FroggerCar(carLeft,100,300,175,8);
+    	car2 = new FroggerCar(carRight,600,225,175,8);
+    	
     }
     public void keyPressed()
     {
@@ -66,6 +71,23 @@ public class Frogger extends PApplet {
     	background(background);
     	fill(0,255,0);
     	ellipse(x,y,100,100);
+    	image(car1.car,car1.x,car1.y);
+    	image(car2.car,car2.x,car2.y);
+    	car1.left();
+    	car2.right();
+    	if(intersects(car1)||intersects(car2)) {
+    		x = 400;
+    		y = 300;
+    	}
+    }
+    boolean intersects(FroggerCar car) {
+    	 if ((y > car.getY() && y < car.getY()+50) &&
+    	                (x > car.getX() && x < car.getX()+car.getSize())) {
+    	   return true;
+    	  }
+    	 else  {
+    	  return false;
+    	 }  
     }
     static public void main(String[] args) {
         PApplet.main(Frogger.class.getName());
