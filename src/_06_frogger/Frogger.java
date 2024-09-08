@@ -7,7 +7,7 @@ public class Frogger extends PApplet {
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
     int x = 400;
-    int y = 300;
+    int y = 550;
     PImage background;
     PImage carLeft;
     PImage carRight;
@@ -27,8 +27,9 @@ public class Frogger extends PApplet {
     	carLeft = loadImage("src/_06_frogger/carLeft.png");
     	carRight = loadImage("src/_06_frogger/carRight.png");
     	frog = loadImage("src/_06_frogger/frog.png");
-    	car1 = new FroggerCar(carLeft,100,300,175,8);
-    	car2 = new FroggerCar(carRight,600,225,175,8);
+    	car1 = new FroggerCar(carLeft,100,300,175,5);
+    	car2 = new FroggerCar(carRight,600,225,175,5);
+    	frog.resize(50, 50);
     	
     }
     public void keyPressed()
@@ -36,28 +37,28 @@ public class Frogger extends PApplet {
         if(key == CODED){
             if(keyCode == UP)
             {
-               y--;
+               y-=3;
             }
             else if(keyCode == DOWN)
             {
-                y++; 
+                y+=3; 
             }
             else if(keyCode == RIGHT)
             {
-                x++;
+                x+=3;
             }
             else if(keyCode == LEFT)
             {
-                x--;
+                x-=3;
             }
         }
     }
     public void frogBorders() {
     	if(y>600) {
-    		y=300;
+    		y=550;
     	}
     	else if(y<0) {
-    		y=300;
+    		y=550;
     	}
     	else if(x>800) {
     		x=400;
@@ -69,19 +70,22 @@ public class Frogger extends PApplet {
     @Override
     public void draw() {
     	background(background);
-    	fill(0,255,0);
-    	ellipse(x,y,100,100);
+    	image(frog,x,y);
     	image(car1.car,car1.x,car1.y);
     	image(car2.car,car2.x,car2.y);
     	car1.left();
     	car2.right();
     	if(intersects(car1)||intersects(car2)) {
     		x = 400;
-    		y = 300;
+    		y = 550;
     	}
+    	if(y<50) {
+    		System.out.println("You successfully crossed the road, CONGRATULATIONS!!!");
+    	}
+    	
     }
     boolean intersects(FroggerCar car) {
-    	 if ((y > car.getY() && y < car.getY()+50) &&
+    	 if ((y > car.getY()+car.getSize()/3 && y < car.getY()+car.getSize()*2/3) &&
     	                (x > car.getX() && x < car.getX()+car.getSize())) {
     	   return true;
     	  }
